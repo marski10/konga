@@ -73,6 +73,43 @@
 
                 })
 
+                // Listen for route events
+                $rootScope.$on('route.created',function(event,data){
+                    var message = 'New route created: ' + (data.route.name || data.route.id) + 
+                                 ' on ' + data.connection.name;
+                    
+                    add({
+                        icon: 'fa-plus-circle',
+                        message: message
+                    });
+
+                    MessageService.success('Route created: ' + (data.route.name || data.route.id));
+                })
+
+                $rootScope.$on('route.updated',function(event,data){
+                    var message = 'Route updated: ' + (data.route.name || data.route.id) + 
+                                 ' on ' + data.connection.name;
+                    
+                    add({
+                        icon: 'fa-edit',
+                        message: message
+                    });
+
+                    MessageService.info('Route updated: ' + (data.route.name || data.route.id));
+                })
+
+                $rootScope.$on('route.deleted',function(event,data){
+                    var message = 'Route deleted: ' + (data.route.name || data.route.id) + 
+                                 ' from ' + data.connection.name;
+                    
+                    add({
+                        icon: 'fa-trash',
+                        message: message
+                    });
+
+                    MessageService.warning('Route deleted: ' + (data.route.name || data.route.id));
+                })
+
                 return {
 
                     load   : load,

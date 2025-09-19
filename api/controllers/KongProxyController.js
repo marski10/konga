@@ -136,26 +136,31 @@ var self = module.exports = {
       }
 
 
-      // Apply after Hooks
-      switch(req.method.toLowerCase()) {
-        case "get":
-          return ProxyHooks.afterEntityRetrieve(entity, req, response.body, function (err, data) {
-            if(err) return res.badRequest(err);
-            return res.json(data);
-          });
-        case "post":
-          return ProxyHooks.afterEntityCreate(entity, req, response.body, konga_extras || {}, function (err, data) {
-            if(err) return res.badRequest(err);
-            return res.json(data);
-          });
-        case "delete":
-          return ProxyHooks.afterEntityDelete(entity,req,function (err) {
-            if(err) return res.badRequest(err);
-            return res.json(response);
-          });
-        default:
-          return res.json(response.body)
-      }
+    // Apply after Hooks
+    switch(req.method.toLowerCase()) {
+      case "get":
+        return ProxyHooks.afterEntityRetrieve(entity, req, response.body, function (err, data) {
+          if(err) return res.badRequest(err);
+          return res.json(data);
+        });
+      case "post":
+        return ProxyHooks.afterEntityCreate(entity, req, response.body, konga_extras || {}, function (err, data) {
+          if(err) return res.badRequest(err);
+          return res.json(data);
+        });
+      case "patch":
+        return ProxyHooks.afterEntityUpdate(entity, req, response.body, konga_extras || {}, function (err, data) {
+          if(err) return res.badRequest(err);
+          return res.json(data);
+        });
+      case "delete":
+        return ProxyHooks.afterEntityDelete(entity,req,function (err) {
+          if(err) return res.badRequest(err);
+          return res.json(response);
+        });
+      default:
+        return res.json(response.body)
+    }
 
 
     });

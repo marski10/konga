@@ -47,6 +47,12 @@ var self = module.exports = {
     return self.hooks[entityName].afterCreate(req, data, konga_extras, next)
   },
 
+  afterEntityUpdate: function(entityName, req, data, konga_extras, next) {
+    sails.log.debug("KongProxyHooks:afterEntityUpdate called()", entityName);
+    if(!entityName || !self.hooks[entityName] || !self.hooks[entityName].afterUpdate) return next(null, data);
+    return self.hooks[entityName].afterUpdate(req, data, konga_extras, next)
+  },
+
   afterEntityDelete: function(entityName, req, next) {
     sails.log.debug("KongProxyHooks:afterEntityDelete called()", entityName);
     if(!entityName || !self.hooks[entityName] || !self.hooks[entityName].afterDelete) return next();
@@ -183,6 +189,103 @@ var self = module.exports = {
         });
       },
     },
+    routes: {
+      afterCreate: function(req, data, konga_extras, next) {
+        sails.log.debug("KongProxyHooks:routes:afterCreate called()", data);
+        
+        // Import the route alerts module
+        var RouteAlerts = require('../events/route-alerts');
+        
+        // Get connection information
+        var connection = req.connection || null;
+        
+        if (connection && data) {
+          // Get user information from token
+          if (req.token && req.token !== 'noauth') {
+            sails.models.user.findOne({id: req.token}).exec(function(err, user) {
+              if (err) {
+                sails.log.error("KongProxyHooks:routes:afterCreate:error getting user", err);
+                user = null;
+              }
+              
+              // Emit route created event
+              RouteAlerts.notifyRouteCreated(data, connection, user);
+            });
+          } else {
+            // Emit route created event without user info
+            RouteAlerts.notifyRouteCreated(data, connection, null);
+          }
+        }
+        
+        return next(null, data);
+      },
+      afterUpdate: function(req, data, konga_extras, next) {
+        sails.log.debug("KongProxyHooks:routes:afterUpdate called()", data);
+        
+        // Import the route alerts module
+        var RouteAlerts = require('../events/route-alerts');
+        
+        // Get connection information
+        var connection = req.connection || null;
+        
+        if (connection && data) {
+          // Get user information from token
+          if (req.token && req.token !== 'noauth') {
+            sails.models.user.findOne({id: req.token}).exec(function(err, user) {
+              if (err) {
+                sails.log.error("KongProxyHooks:routes:afterUpdate:error getting user", err);
+                user = null;
+              }
+              
+              // Emit route updated event
+              RouteAlerts.notifyRouteUpdated(data, connection, user);
+            });
+          } else {
+            // Emit route updated event without user info
+            RouteAlerts.notifyRouteUpdated(data, connection, null);
+          }
+        }
+        
+        return next(null, data);
+      },
+      afterDelete: function(req, next) {
+        sails.log.debug("KongProxyHooks:routes:afterDelete called()");
+        
+        // Import the route alerts module
+        var RouteAlerts = require('../events/route-alerts');
+        
+        // Get connection information
+        var connection = req.connection || null;
+        
+        // Extract route ID from path
+        var routeId = req.path.replace("/kong", "").split("/").filter(function (e) {
+          return e;
+        })[1];
+        
+        if (connection && routeId) {
+          // Create a minimal route object for the notification
+          var route = { id: routeId };
+          
+          // Get user information from token
+          if (req.token && req.token !== 'noauth') {
+            sails.models.user.findOne({id: req.token}).exec(function(err, user) {
+              if (err) {
+                sails.log.error("KongProxyHooks:routes:afterDelete:error getting user", err);
+                user = null;
+              }
+              
+              // Emit route deleted event
+              RouteAlerts.notifyRouteDeleted(route, connection, user);
+            });
+          } else {
+            // Emit route deleted event without user info
+            RouteAlerts.notifyRouteDeleted(route, connection, null);
+          }
+        }
+        
+        return next();
+      }
+    },
     upstreams: {
       afterList: function(req, resBody, next) {
         if(!req.connection) return next(null, resBody);
@@ -231,7 +334,7 @@ var self = module.exports = {
         if(!req.connection) return next();
         // The path must be of type /kong/<entityName>/<entityId>
         var entityId = req.path.replace("/kong","").split("/").filter(function (e) {
-          return e;
+        return e;
         })[1];
 
         sails.models.upstreamalert.destroy({
