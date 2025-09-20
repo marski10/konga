@@ -1,0 +1,56 @@
+{
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/.tmp": true,
+    "**/coverage": true,
+    "**/.sails": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/.tmp": true,
+    "**/coverage": true,
+    "**/.sails": true,
+    "**/min": true
+  },
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/bower_components/**": true,
+    "**/.tmp/**": true,
+    "**/coverage/**": true,
+    "**/.sails/**": true
+  },
+  "javascript.preferences.quoteStyle": "single",
+  "javascript.suggest.autoImports": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.quoteStyle": "single",
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "emmet.includeLanguages": {
+    "ejs": "html"
+  },
+  "files.associations": {
+    "*.ejs": "html"
+  },
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "eslint.workingDirectories": [
+    "."
+  ],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact"
+  ],
+  "debug.console.fontSize": 14,
+  "debug.console.lineHeight": 22,
+  "debug.internalConsoleOptions": "openOnSessionStart",
+  "debug.showBreakpointsInOverviewRuler": true,
+  "debug.showInlineBreakpointCandidates": true
+}
+

@@ -45,6 +45,21 @@ var defaultModel = _.merge(_.cloneDeep(require('../base/Model')), {
             title: "An API is down or unresponsive",
             description: "Health checks must be enabled for the APIs that need to be monitored.",
             active: false
+          },
+          route_created: {
+            title: "A route has been created",
+            description: "Get notified when new routes are created in Kong.",
+            active: false
+          },
+          route_updated: {
+            title: "A route has been updated",
+            description: "Get notified when routes are updated in Kong.",
+            active: false
+          },
+          route_deleted: {
+            title: "A route has been deleted",
+            description: "Get notified when routes are deleted from Kong.",
+            active: false
           }
         },
 

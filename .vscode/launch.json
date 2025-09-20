@@ -1,0 +1,183 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Konga Backend",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/app.js",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": "1337",
+        "TOKEN_SECRET": "your-secret-key-here",
+        "DB_ADAPTER": "sails-disk"
+      },
+      "console": "integratedTerminal",
+      "restart": true,
+      "protocol": "inspector",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--harmony"],
+      "skipFiles": [
+        "<node_internals>/**",
+        "node_modules/**"
+      ],
+      "outputCapture": "std"
+    },
+    {
+      "name": "Debug Konga Backend (Production)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/app.js",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "NODE_ENV": "production",
+        "PORT": "1337",
+        "TOKEN_SECRET": "your-secret-key-here",
+        "DB_ADAPTER": "sails-disk"
+      },
+      "console": "integratedTerminal",
+      "restart": true,
+      "protocol": "inspector",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--harmony"],
+      "skipFiles": [
+        "<node_internals>/**",
+        "node_modules/**"
+      ],
+      "outputCapture": "std"
+    },
+    {
+      "name": "Debug Konga Backend (MongoDB)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/app.js",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": "1337",
+        "TOKEN_SECRET": "your-secret-key-here",
+        "DB_ADAPTER": "sails-mongo",
+        "DB_HOST": "localhost",
+        "DB_PORT": "27017",
+        "DB_DATABASE": "konga_database"
+      },
+      "console": "integratedTerminal",
+      "restart": true,
+      "protocol": "inspector",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--harmony"],
+      "skipFiles": [
+        "<node_internals>/**",
+        "node_modules/**"
+      ],
+      "outputCapture": "std"
+    },
+    {
+      "name": "Debug Konga Backend (PostgreSQL)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/app.js",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": "1337",
+        "TOKEN_SECRET": "your-secret-key-here",
+        "DB_ADAPTER": "sails-postgresql",
+        "DB_HOST": "localhost",
+        "DB_PORT": "5432",
+        "DB_USER": "konga",
+        "DB_PASSWORD": "konga",
+        "DB_DATABASE": "konga_database"
+      },
+      "console": "integratedTerminal",
+      "restart": true,
+      "protocol": "inspector",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--harmony"],
+      "skipFiles": [
+        "<node_internals>/**",
+        "node_modules/**"
+      ],
+      "outputCapture": "std"
+    },
+    {
+      "name": "Debug Konga Backend (MySQL)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/app.js",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": "1337",
+        "TOKEN_SECRET": "your-secret-key-here",
+        "DB_ADAPTER": "sails-mysql",
+        "DB_HOST": "localhost",
+        "DB_PORT": "3306",
+        "DB_USER": "konga",
+        "DB_PASSWORD": "konga",
+        "DB_DATABASE": "konga_database"
+      },
+      "console": "integratedTerminal",
+      "restart": true,
+      "protocol": "inspector",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--harmony"],
+      "skipFiles": [
+        "<node_internals>/**",
+        "node_modules/**"
+      ],
+      "outputCapture": "std"
+    },
+    {
+      "name": "Debug Konga Backend (No Auth)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/app.js",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": "1337",
+        "TOKEN_SECRET": "your-secret-key-here",
+        "DB_ADAPTER": "sails-disk",
+        "NO_AUTH": "true"
+      },
+      "console": "integratedTerminal",
+      "restart": true,
+      "protocol": "inspector",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--harmony"],
+      "skipFiles": [
+        "<node_internals>/**",
+        "node_modules/**"
+      ],
+      "outputCapture": "std"
+    },
+    {
+      "name": "Debug Konga Route Alerts",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/app.js",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": "1337",
+        "TOKEN_SECRET": "your-secret-key-here",
+        "DB_ADAPTER": "sails-disk",
+        "KONGA_LOG_LEVEL": "debug"
+      },
+      "console": "integratedTerminal",
+      "restart": true,
+      "protocol": "inspector",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--harmony"],
+      "skipFiles": [
+        "<node_internals>/**",
+        "node_modules/**"
+      ],
+      "outputCapture": "std",
+      "stopOnEntry": false,
+      "args": []
+    }
+  ]
+}
