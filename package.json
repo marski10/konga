@@ -9,7 +9,8 @@
     "GUI"
   ],
   "dependencies": {
-    "@slack/client": "^3.16.0",
+    "@slack/web-api": "^6.13.0",
+    "@slack/webhook": "^6.1.0",
     "async": "1.5.0",
     "barrels": "^1.6.5",
     "bcryptjs": "2.3.0",
