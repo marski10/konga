@@ -1,3 +1,4 @@
+
 /**
  * Simple service to activate noty2 message to GUI. This service can be used every where in application. Generally
  * all $http and $socket queries uses this service to show specified errors to user.

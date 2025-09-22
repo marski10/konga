@@ -412,3 +412,4 @@ function makeHTMLNotification(route, connection, user, action) {
 
   return html;
 }
+
